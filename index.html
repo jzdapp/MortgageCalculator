@@ -1,95 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport"
-			content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<title>房贷计算器 - 轻松掌握您的房贷详情 | 官方下载</title>
 		<link rel="stylesheet" href="css/style.css">
+		<style>
+			:root { 
+				--primary:#0a84ff; 
+				--primary-dark:#0066cc; 
+				--bg:#f8fafc; 
+				--text:#1e293b; 
+				--muted:#64748b; 
+				--card:#ffffff; 
+				--border:#e2e8f0;
+				--shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+				--shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+			}
+			* { box-sizing: border-box; }
+			body { 
+				margin:0; 
+				font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Helvetica,Arial,sans-serif; 
+				color:var(--text); 
+				background:linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+				min-height:100vh;
+			}
+			a { color:inherit; text-decoration:none; }
+			.container { max-width:1200px; margin:0 auto; padding:20px; }
+			@media (min-width: 768px) { .container { padding:32px; } }
+			main.container { padding-top:0; }
+			.hero { 
+				display:grid; 
+				grid-template-columns: 1.1fr 0.9fr; 
+				gap:32px; 
+				align-items:start; 
+				margin-bottom:0px;
+			}
+			@media (max-width: 900px){ .hero{ grid-template-columns:1fr; gap:24px; } }
+			.card { 
+				background:var(--card); 
+				border-radius:20px; 
+				padding:28px; 
+				box-shadow:var(--shadow-lg);
+				border:1px solid var(--border);
+				backdrop-filter:blur(10px);
+			}
+			@media (max-width: 768px) { .card { padding:20px; border-radius:16px; } }
+			h1 { 
+				font-size:28px; 
+				margin:0 0 12px; 
+				font-weight:700;
+				background:linear-gradient(135deg, #0a84ff 0%, #0066cc 100%);
+				-webkit-background-clip:text;
+				-webkit-text-fill-color:transparent;
+				background-clip:text;
+			}
+			@media (min-width: 768px) { h1 { font-size:32px; } }
+			.subtitle { 
+				color:var(--muted); 
+				margin:0 0 24px; 
+				line-height:1.7; 
+				font-size:16px; 
+			}
+			@media (min-width: 768px) { .subtitle { font-size:18px; } }
+			.badges {
+				display:flex; 
+				gap:16px; 
+				flex-wrap:nowrap; 
+				margin-bottom:24px; 
+				justify-content:center;
+				align-items:center;
+				overflow-x:auto;
+				padding:0 10px;
+			}
+			.badges .btn { 
+				margin:0 !important; 
+				flex-shrink:0;
+			}
+			.btn { 
+				display:flex; 
+				align-items:center;
+				justify-content:center;
+				gap:8px; 
+				padding:12px 20px; 
+				border-radius:14px; 
+				font-weight:600; 
+				transition:all .2s ease; 
+				font-size:14px;
+				min-width:100px;
+				flex-shrink:0;
+				position:relative;
+				overflow:hidden;
+			}
+			.btn-primary { 
+				background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+				color:#fff; 
+				box-shadow:0 8px 20px rgba(10,132,255,.3);
+			}
+			.btn-primary:hover { 
+				transform: translateY(-2px); 
+				box-shadow:0 12px 24px rgba(10,132,255,.4);
+			}
+			.btn-outline { 
+				border:2px solid var(--border); 
+				background:#fff; 
+				color:var(--text);
+			}
+			.btn-outline:hover { 
+				transform: translateY(-2px); 
+				border-color:var(--primary);
+				box-shadow:0 8px 20px rgba(0,0,0,.1);
+			}
+			.qr-section { text-align:center; margin-top:8px; }
+			/* 小屏幕设备优化 */
+			@media (max-width: 375px) {
+				.badges {
+					gap:12px;
+				}
+				.btn {
+					padding:10px 16px !important;
+					font-size:13px !important;
+					min-width:90px !important;
+				}
+			}
+			.qr { 
+				display:inline-block; 
+				background:var(--card); 
+				border-radius:16px; 
+				padding:20px; 
+				box-shadow:var(--shadow);
+				border:1px solid var(--border);
+			}
+			.qr img { 
+				width:120px; 
+				height:120px; 
+				border-radius:12px; 
+				box-shadow:0 4px 12px rgba(0,0,0,.1);
+			}
+			.qr .meta { 
+				font-size:15px; 
+				color:var(--muted); 
+				margin-top:12px; 
+				font-weight:500;
+			}
+			.features { 
+				display:grid; 
+				grid-template-columns:repeat(3,1fr); 
+				gap:20px; 
+				margin-top:0px; 
+			}
+			@media (max-width: 900px){ .features{ grid-template-columns:1fr; gap:16px; } }
+			.feature { 
+				background:var(--card); 
+				border-radius:16px; 
+				padding:20px; 
+				line-height:1.6; 
+				box-shadow:var(--shadow); 
+				font-size:15px;
+				border:1px solid var(--border);
+				transition:transform .2s ease;
+			}
+			.feature:hover { transform: translateY(-2px); }
+			.gallery { 
+				display:flex; 
+				justify-content:center; 
+				align-items:flex-start; 
+			}
+			.gallery img { 
+				max-width:100%; 
+				height:auto; 
+				max-height:500px; 
+				object-fit:contain; 
+				border-radius:20px; 
+				box-shadow:0 12px 28px rgba(0,0,0,.15); 
+				background:#f8fafc;
+				border:1px solid var(--border);
+			}
+			@media (min-width: 768px){ .gallery img{ max-width:400px; max-height:600px; } }
+			.footer { 
+				text-align:center; 
+				color:#475569; 
+				font-size:14px; 
+				padding:32px 0 16px; 
+				margin-top:32px;
+			}
+		</style>
 	</head>
 	<body>
-		<div class="max-w-4xl px-4 sm:px-4 py-3 mx-auto rounded-lg cursor-pointer sm:hover:bg-block group"
-			id="zh/why-certain-view-modifiers-in-swift-6-cannot-usethe-state-property">
-			<div id="img-content" class="rich_media_wrp">
-				<h1 class="rich_media_title " id="activity-name">
-					房贷计算器
-				</h1>
-				<div class="rich_media_content js_underline_content autoTypeSetting24psection fix_apple_default_style"
-					id="js_content" style="">
-					<p style="font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: 400; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; box-sizing: border-box; word-break: break-word;  font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;; visibility: visible;"
-						class="js_darkmode__0"><strong data-spm-anchor-id="5176.28103460.0.i9.1aa65d27XTgLvJ"
-							style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-								style="visibility: visible;">房贷计算器 - 轻松掌握您的房贷详情</span></strong></p>
-					<p style="font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: 400; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; box-sizing: border-box; word-break: break-word; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;; visibility: visible;"
-						class="js_darkmode__1"><span leaf=""
-							style="visibility: visible;">无论您是首次购房还是置换房产，我们的房贷计算器都能帮助您快速准确地计算每月还款额。支持商业贷款、公积金贷款及组合贷款等多种贷款类型，满足不同用户的需求。</span>
-					</p>
-					<p style="font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: 400; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; box-sizing: border-box; word-break: break-word; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;; visibility: visible;"
-						class="js_darkmode__2"><strong
-							style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-								style="visibility: visible;">核心功能：</span></strong></p>
-					<ul style="font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: 400; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; box-sizing: border-box; padding-inline-start: 0px; margin-bottom: 1em; margin-top: 1em; padding-left: 2em; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;; visibility: visible;"
-						class="list-paddingleft-1 js_darkmode__3">
-						<li
-							style="box-sizing: border-box; margin-block: 0px; margin-inline: 0px; padding-inline-start: visibility: visible;">
-							<strong style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-									style="visibility: visible;">多种贷款类型</span></strong>
-							<section style="visibility: visible;"><span leaf=""
-									style="visibility: visible;">全面支持商业贷款、公积金贷款以及组合贷款的计算。</span></section>
-						</li>
-						<li
-							style="box-sizing: border-box; margin-block: 0px; margin-inline: 0px; padding-inline-start: 0px; margin: 0.5em 0px; visibility: visible;">
-							<strong style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-									style="visibility: visible;">详细还款计划</span></strong>
-							<section style="visibility: visible;"><span leaf=""
-									style="visibility: visible;">提供详细的月供明细，让您对每一期的还款情况一目了然。</span></section>
-						</li>
-						<li
-							style="box-sizing: border-box; margin-block: 0px; margin-inline: 0px; padding-inline-start: 0px; margin: 0.5em 0px; visibility: visible;">
-							<strong style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-									style="visibility: visible;">灵活参数调整</span></strong>
-							<section style="visibility: visible;"><span leaf=""
-									style="visibility: visible;">轻松修改贷款利率、期限等关键参数，即时查看不同方案下的还款变化。</span></section>
-						</li>
-						<li
-							style="box-sizing: border-box; margin-block: 0px; margin-inline: 0px; padding-inline-start: 0px; margin: 0.5em 0px; visibility: visible;">
-							<strong style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-									style="visibility: visible;">直观对比工具</span></strong>
-							<section style="visibility: visible;"><span leaf=""
-									style="visibility: visible;">方便快捷地比较不同贷款方案的具体细节，助您做出明智的选择。</span></section>
-						</li>
-						<li
-							style="box-sizing: border-box; margin-block: 0px; margin-inline: 0px; padding-inline-start: 0px; margin: 0.5em 0px; visibility: visible;">
-							<strong style="box-sizing: border-box; font-weight: 600; visibility: visible;"><span leaf=""
-									style="visibility: visible;">数据本地处理</span></strong>
-							<section style="visibility: visible;"><span leaf=""
-									style="visibility: visible;">所有计算过程均在本地完成，确保您的个人信息安全无忧。</span></section>
-						</li>
-					</ul>
-					<p style="font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: 400; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; box-sizing: border-box; word-break: break-word; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Noto Sans&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;; visibility: visible;"
-						class="js_darkmode__4"><span leaf=""
-							style="visibility: visible;">我们致力于为用户提供简单易用、功能强大的房贷计算工具。通过清晰的界面设计和实用的功能，帮助您更好地理解和管理自己的房贷信息。</span>
-					</p>
-					<section style="text-align: center; visibility: visible;" nodeleaf=""><img
-							src="img/preview.webp"
-							crossorigin="anonymous" alt="图片" data-fail="0"></section>
-					<section
-						style="outline: 0px;font-family: system-ui, -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;text-indent: 0em;white-space: normal;line-height: 1.6em;text-align: left;">
-						<span leaf=""><br></span></section>
-					<section style="text-align: left;text-indent: 0em;"><span
-							style="font-size: 15px;text-decoration: none;"></span></section>
-		
-					<section style="text-align: justify;text-indent: 0em;"><span
-							style="text-decoration: none;font-size: 15px;"><span
-								leaf="">联系我们：</span></span></section>
-					<section style="text-align: justify;text-indent: 0em;"><span
-							style="text-decoration: none;font-size: 15px;"><span
-								leaf="">QQ：917446796</span></span></section>
-					<section style="text-align: justify;text-indent: 0em;"><span
-							style="text-decoration: none;font-size: 15px;"><span
-								leaf="">邮箱：jifengs@126.com</span></span></section>
-					<br />
-				</div>
+		<header class="container">
+			<div class="hero">
+				<section class="card">
+					<div>
+						<h1>房贷计算器 · 轻松掌握房贷详情</h1>
+						<p class="subtitle">无论您是首次购房还是置换房产，我们的房贷计算器都能帮助您快速准确地计算每月还款额。支持商业贷款、公积金贷款及组合贷款等多种贷款类型，满足不同用户的需求。</p>
+					</div>
+					<div class="badges" role="group" aria-label="下载">
+						<a class="btn btn-primary" href="https://microdown.myapp.com/ug/%E6%88%BF%E8%B4%B7%E9%80%9A-%E6%88%BF%E8%B4%B7%E8%AE%A1%E7%AE%97%E5%99%A8-yyb.apk?comment=channelId%3D1178424%26context%3D%26scheme%3Dtmast%253A%252F%252Fencrypt%253Fencryptdata%253Di5qtlcu8AXbRalqt%25252Fx8UzuptB9FZi4XbGqR1iQ6BQJigU7z4YlwOy%25252BHvcwOpE0MyY9n64vXKCqikeW4DNWVJ%25252B5uTEUfljJ7CZ55QInJHvuxuAUkw%25252B5wjrH8ouTrQ9KHBtnjIJ%25252BHmGMPyozUjWP%25252BV5CRxhSG962GnL5UuY1Wou5YF695qouRGaOinMN95XAZ%25252Fo17%25252FbjZ3MikBlmVYRrJk5pBwtQW6yQfpS6LlD51sioA04%25252Bsr1T7T293bq4FQW1kGZUsE5woMMh7F5WJgSlxdMJcJgtnAaKuun8OCRMEdlXX1gWNy1TIqI2gWvjNDkOQGgTvfZhhnriG6ZllL13gvW1eRIcnNge%25252F%25252FJdHsapl51D8D7yTM07vFARhTjlyy0LM5oB%25252BsVJKRlWyeOYtT%25252B1NYh6%25252F5ikpIvbTnpI%25252Fd8nmj82z3wxG0NHGzqg1rCojP7sUZ6XzDbYfnXhr4xdy9AnSP1m0Ao4KoFIzvtBe2e0eGUqwqYcdwyz7hnBVGNRzYnf%25252BVuf3mcSqGlUYM%25252BcLLio%25252F%25252BL6VVHdjSCOQegntQPOnRYdLvSYAvSC6I7JbDgED54e3d3VwFrc4VC%25252Bc0SsOqJybj99itPcOYukJ7CDm5kbwF0o8UonEI4In6XCXwcLmZomihlDkbxhlvJG8qRa6FMqV%25252FAAvxpqtfm0ncvrJffPOs3FRsTXYD0r9lea4eKVEUwGSYhOPXBmY1R60QhPYKkIAFUtnyTYsJPbaSXFyZx6w%25252BDtJC4gChtUSVymDcdzX%25252BfcPif9ocycFZa6ADqnHFW6ND%25252FmNvlTq55ughhC1xFTkBzuL1MUWUSLo2oX1nzwax85AHGqIlnReBvkon4dW21OODj0a2GaIW2HuruLtXrB4zU5RernfC1iJXOpY49jrvOJlhCPOqovB5BKMSvBopUn57QP4a%25252BJuD3R7hJ9AQxLzvY5KYLMfuDlAU9Vtv0Uf%25252B5AF2HJT%25252FETgcEgvCzVWPdvM2NYso89QxMiehPGZrUMhjtpXkxKLkzp%25252BNTTblOj7pSD3HKi8pf8cw1xg%25252BN7qho6%25252BAxEAoL3vz%25252BdP%25252Bek0k0C3fYRn19%25252FVMDjjyK5B%25252F7fqLC%25252BHGhnfDf%25252FCspzBbFO%25252Fl6CHba3dnnYdMxzxIhk7LxeaBncOaXvzN2YSgKETlFmcYmfoeIqjA2KYY4SGoP5zeGOcPg0uYsHw9Tdfl1g39XrPLERUWbEq82cN3mq%25252B8DgGwpidoDAka68zjWawZNVzIDfNy5WQ%25252F1TD7g1YG%2526start_time%253D1761732173514%2526expiry_time%253D1761735773514%26t%3D1761732173000%26signature%3DjxN1%252BabIkXWmIFyPJckWONsVbXvCbTudGJLgnreTMfmFMJa8ynu%252Fp3e5IHprE4tz1m4dvg14RtOGvcOqNq4TPZJo0y%252BpNeZkIoAYJMGpY4LBBHCsF9xF0%252Bn0EJlPT3dMvTXrpSJbK7R5IT0EkC7w06hpO3B2pyE14KXQ0mTnP%252F8%253D&sign_type=V2&realname=20251023_dd046bd3e6f97c65a47235c22356372a_offset_30707712" target="_blank" rel="noopener nofollow">
+							<span>安卓版下载</span>
+						</a>
+						<div style="width:20px;"></div>
+						<a class="btn btn-outline" href="https://apps.apple.com/cn/app/id6737436422" target="_blank" rel="noopener nofollow">
+							<span>iOS版下载</span>
+						</a>
+					</div>
+					<div class="qr-section">
+						<div class="qr">
+							<img src="img/code.png" alt="下载二维码" style="width:120px; height:120px; border-radius:8px;">
+							<div class="meta">扫码下载手机版</div>
+						</div>
+					</div>
+				</section>
+				<section class="card">
+					<div class="gallery">
+						<img src="img/preview.webp" alt="应用截图">
+					</div>
+				</section>
 			</div>
-		</div>
+		</header>
+		<main class="container">
+			<section class="features">
+				<div class="feature">• 多种贷款类型：全面支持商业贷款、公积金贷款以及组合贷款的计算。</div>
+				<div class="feature">• 详细还款计划：提供详细的月供明细，让您对每一期的还款情况一目了然。</div>
+				<div class="feature">• 灵活参数调整：轻松修改贷款利率、期限等关键参数，即时查看不同方案下的还款变化。</div>
+				<div class="feature">• 直观对比工具：方便快捷地比较不同贷款方案的具体细节，助您做出明智的选择。</div>
+				<div class="feature">• 数据本地处理：所有计算过程均在本地完成，确保您的个人信息安全无忧。</div>
+				<div class="feature">• 简洁直观界面：清晰的界面设计和实用的功能，帮助您更好地理解和管理房贷信息。</div>
+			</section>
+		</main>
+		<footer class="container footer">
+			<div>客服邮箱：jifengs@126.com ｜ QQ：3995822696</div>
+			<div style="margin-top:4px">© Beijing Jifeng Technology Small Store</div>
+		</footer>
 	</body>
 </html>
