@@ -34,39 +34,33 @@
             padding: 20px;
         }
 
-        header {
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 10px;
-        }
+        /* header 样式已调整，不再包含标题 */
 
         .back-button {
-            display: inline-block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background-color: var(--secondary);
             color: var(--white);
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border-radius: 50%;
             text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            font-weight: bold;
             transition: all 0.3s ease;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .back-button:hover {
             background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
 
         .detail-content {
@@ -74,6 +68,7 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: var(--shadow);
+            margin-top: 20px; /* 增加顶部边距以保持页面平衡 */
         }
 
         .detail-content h2 {
@@ -145,12 +140,8 @@
     </style>
 </head>
 <body>
+    <a href="buyingprocess.html" class="back-button">←</a>
     <div class="container">
-        <header>
-            <a href="buyingprocess.html" class="back-button">← 返回购房流程图</a>
-            <h1>购房流程详情</h1>
-        </header>
-
         <main class="detail-content">
             <div id="detail-info">
                 <!-- 详细内容将通过 JavaScript 动态加载 -->
@@ -1270,23 +1261,20 @@
             const step = params.step || '1.1';
             
             const detailInfo = document.getElementById('detail-info');
-            const headerTitle = document.querySelector('header h1');
             
             // 检查是否存在对应的内容
             if (detailedContent[tab] && detailedContent[tab][step]) {
                 const content = detailedContent[tab][step];
                 
-                // 更新页面标题和header标题
+                // 更新页面标题
                 document.title = content.title;
-                headerTitle.textContent = content.title;
                 
                 detailInfo.innerHTML = `
                     ${content.content}
                 `;
             } else {
-                // 更新页面标题和header标题
+                // 更新页面标题
                 document.title = '找不到内容';
-                headerTitle.textContent = '找不到内容';
                 
                 detailInfo.innerHTML = `
                     <p>很抱歉，无法找到您请求的内容。请返回购房流程图页面，重新选择一个步骤。</p>
