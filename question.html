@@ -4,63 +4,175 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="css/style.css">
-		<title>房贷小助手</title>
+		<title>房贷小助手 - 常见问题</title>
+		<style>
+			:root {
+				--primary: #0a84ff;
+				--secondary: #3b82f6;
+				--accent: #10b981;
+				--white: #ffffff;
+				--light-gray: #f3f4f6;
+				--gray: #6b7280;
+				--dark-gray: #374151;
+				--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+				--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+				--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+			
+			body {
+				font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+				min-height: 100vh;
+				margin: 0;
+				padding: 20px 0;
+			}
+			
+			.container {
+				max-width: 600px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+			
+			.header {
+				text-align: center;
+				margin-bottom: 40px;
+				color: var(--white);
+			}
+			
+			.header h1 {
+				font-size: 2.5rem;
+				font-weight: 700;
+				margin: 0 0 10px 0;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			}
+			
+			.header p {
+				font-size: 1.1rem;
+				margin: 0;
+				opacity: 0.9;
+			}
+			
+			.question-list {
+				background-color: var(--white);
+				border-radius: 16px;
+				box-shadow: var(--shadow-lg);
+				overflow: hidden;
+				padding: 20px 0;
+				margin-top: 0;
+			}
+			
+			.question-item {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.question-item a {
+				display: block;
+				padding: 20px 30px;
+				text-decoration: none;
+				color: var(--dark-gray);
+				font-size: 1.1rem;
+				font-weight: 500;
+				transition: var(--transition);
+				position: relative;
+				border-bottom: 1px solid var(--light-gray);
+			}
+			
+			.question-item:last-child a {
+				border-bottom: none;
+			}
+			
+			.question-item a:hover {
+				background-color: var(--light-gray);
+				padding-left: 40px;
+				color: var(--primary);
+			}
+			
+			.question-item a::before {
+				content: "→";
+				position: absolute;
+				left: 15px;
+				top: 50%;
+				transform: translateY(-50%);
+				color: var(--primary);
+				font-weight: bold;
+				transition: var(--transition);
+				opacity: 0;
+			}
+			
+			.question-item a:hover::before {
+				opacity: 1;
+				left: 20px;
+			}
+			
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.container {
+					padding: 15px;
+				}
+				
+				.header h1 {
+					font-size: 2rem;
+				}
+				
+				.question-item a {
+					padding: 15px 20px;
+					font-size: 1rem;
+				}
+				
+				.question-item a:hover {
+					padding-left: 30px;
+				}
+			}
+			
+			/* 添加进入动画 */
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			
+			.question-item {
+				animation: fadeInUp 0.6s ease-out forwards;
+				opacity: 0;
+			}
+			
+			.question-item:nth-child(1) { animation-delay: 0.1s; }
+			.question-item:nth-child(2) { animation-delay: 0.2s; }
+			.question-item:nth-child(3) { animation-delay: 0.3s; }
+			.question-item:nth-child(4) { animation-delay: 0.4s; }
+			.question-item:nth-child(5) { animation-delay: 0.5s; }
+			.question-item:nth-child(6) { animation-delay: 0.6s; }
+		</style>
 	</head>
 	<body>
-		<div class="max-w-4xl px-4 sm:px-4 py-3 mx-auto rounded-lg cursor-pointer sm:hover:bg-block group"
-			id="zh/why-certain-view-modifiers-in-swift-6-cannot-usethe-state-property">
-			<div id="img-content" class="rich_media_wrp" style="margin-top: 0px;">
-				<div class="rich_media_content js_underline_content defaultNoSetting fix_apple_default_style"
-					id="js_content" style="">
-					<ul class="list-paddingleft-1" style="list-style-type: none;">
-						<li style="font-weight: bold;font-size: 16px;">
-							<section
-								style="margin: 0px 0px 22px;font-style: normal;font-variant-caps: normal;font-stretch: normal;font-size: 13px;font-family: &quot;PingFang SC&quot;;font-size-adjust: none;font-kerning: auto;font-variant-alternates: normal;font-variant-ligatures: normal;font-variant-numeric: normal;font-variant-east-asian: normal;font-variant-position: normal;font-feature-settings: normal;font-optical-sizing: auto;font-variation-settings: normal;line-height: 1.6em;text-align: justify;text-indent: 0em;">
-								<a class="custom_style" href="loanrate.html" textvalue="2025年最新房贷利率"
-									linktype="text" imgurl="" imgdata="null" tab="innerlink" data-linktype="2"><span
-										style="font-size: 15px;"><strong><span
-												style="letter-spacing: 0.578px;text-decoration: none;">2025年最新房贷利率</span></strong></span></a>
-							</section>
-						</li>
-						<li style="font-weight: bold;font-size: 16px;">
-							<section
-								style="margin: 0px 0px 22px;font-style: normal;font-variant-caps: normal;font-stretch: normal;font-size: 13px;font-family: &quot;PingFang SC&quot;;font-size-adjust: none;font-kerning: auto;font-variant-alternates: normal;font-variant-ligatures: normal;font-variant-numeric: normal;font-variant-east-asian: normal;font-variant-position: normal;font-feature-settings: normal;font-optical-sizing: auto;font-variation-settings: normal;line-height: 1.6em;text-align: justify;text-indent: 0em;">
-								<a class="custom_style" href="question1.html" textvalue="购房贷款流程" linktype="text"
-									imgurl="" imgdata="null" tab="innerlink" data-linktype="2"><span
-										style="font-size: 15px;"><strong><span
-												style="letter-spacing: 0.578px;text-decoration: none;">购房贷款流程</span></strong></span></a>
-							</section>
-						</li>
-						<li style="font-weight: bold;font-size: 16px;">
-							<section
-								style="margin: 0px 0px 22px;font-style: normal;font-variant-caps: normal;font-stretch: normal;font-size: 13px;font-family: &quot;PingFang SC&quot;;font-size-adjust: none;font-kerning: auto;font-variant-alternates: normal;font-variant-ligatures: normal;font-variant-numeric: normal;font-variant-east-asian: normal;font-variant-position: normal;font-feature-settings: normal;font-optical-sizing: auto;font-variation-settings: normal;line-height: 1.6em;text-align: justify;text-indent: 0em;">
-								<a class="custom_style" href="question2.html" textvalue="公积金贷款政策" linktype="text"
-									imgurl="" imgdata="null" tab="innerlink" data-linktype="2"><span
-										style="font-size: 15px;"><strong><span
-												style="letter-spacing: 0.578px;text-decoration: none;">公积金贷款政策</span></strong></span></a>
-							</section>
-						</li>
-						<li style="font-weight: bold;font-size: 16px;">
-							<section
-								style="margin: 0px 0px 22px;font-style: normal;font-variant-caps: normal;font-stretch: normal;font-size: 13px;font-family: &quot;PingFang SC&quot;;font-size-adjust: none;font-kerning: auto;font-variant-alternates: normal;font-variant-ligatures: normal;font-variant-numeric: normal;font-variant-east-asian: normal;font-variant-position: normal;font-feature-settings: normal;font-optical-sizing: auto;font-variation-settings: normal;line-height: 1.6em;text-align: justify;text-indent: 0em;">
-								<a class="custom_style" href="question3.html" textvalue="税费政策" linktype="text"
-									imgurl="" imgdata="null" tab="innerlink" data-linktype="2"><span
-										style="font-size: 15px;"><strong><span
-												style="letter-spacing: 0.578px;text-decoration: none;">税费政策</span></strong></span></a>
-							</section>
-						</li>
-						<li style="font-weight: bold;font-size: 16px;">
-							<section
-								style="margin: 0px 0px 22px;font-style: normal;font-variant-caps: normal;font-stretch: normal;font-size: 13px;font-family: &quot;PingFang SC&quot;;font-size-adjust: none;font-kerning: auto;font-variant-alternates: normal;font-variant-ligatures: normal;font-variant-numeric: normal;font-variant-east-asian: normal;font-variant-position: normal;font-feature-settings: normal;font-optical-sizing: auto;font-variation-settings: normal;line-height: 1.6em;text-align: justify;text-indent: 0em;">
-								<a class="custom_style" href="paymenttype.html" textvalue="等额本金和等额本息的区别？" linktype="text"
-									imgurl="" imgdata="null" tab="innerlink" data-linktype="2"><span
-										style="font-size: 15px;"><strong><span
-												style="letter-spacing: 0.578px;text-decoration: none;">等额本金和等额本息的区别？</span></strong></span></a>
-							</section>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<div class="container">
+			<ul class="question-list">
+				<li class="question-item">
+					<a href="buyingprocess.html">买房流程指南</a>
+				</li>
+				<li class="question-item">
+					<a href="loanrate.html">2025年最新房贷利率</a>
+				</li>
+				<li class="question-item">
+					<a href="question1.html">购房贷款流程</a>
+				</li>
+				<li class="question-item">
+					<a href="question2.html">公积金贷款政策</a>
+				</li>
+				<li class="question-item">
+					<a href="question3.html">税费政策</a>
+				</li>
+				<li class="question-item">
+					<a href="paymenttype.html">等额本金和等额本息的区别？</a>
+				</li>
+			</ul>
 		</div>
 	</body>
 </html>
