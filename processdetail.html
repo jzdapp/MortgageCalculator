@@ -36,31 +36,29 @@
 
         /* header 样式已调整，不再包含标题 */
 
+        /* 悬浮返回按钮样式 */
         .back-button {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--secondary);
-            color: var(--white);
-            padding: 12px 16px;
-            border-radius: 50%;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
+            bottom: 30px;
+            right: 30px;
             width: 50px;
             height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: #0a84ff;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            font-size: 24px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
-
+        
         .back-button:hover {
-            background-color: #2980b9;
+            background-color: #0066cc;
             transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .detail-content {
@@ -140,7 +138,7 @@
     </style>
 </head>
 <body>
-    <a href="buyingprocess.html" class="back-button">←</a>
+	<a href="buyingprocess.html" class="back-button" onclick="window.history.back(); return false;">←</a>
     <div class="container">
         <main class="detail-content">
             <div id="detail-info">
